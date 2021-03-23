@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        body{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .color{
+            width: 25px;
+            height: 25px;
+        }
+
+        #canvas{
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="colors">
+        <button class="color" value="#ff00ff" style="background: #ff00ff"></button>
+        <button class="color" value="#ff0000" style="background: #ff0000"></button>
+        <button class="color" value="#00ff00" style="background: #00ff00"></button>
+    </div>
+
+    <div id="pencil_size">
+        <label for="pencil">Pencil Size</label>
+        <select name="pencil" id="pencil">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+    </div>
+    <canvas id="canvas">
+
+    </canvas>
+
+    <script>
+
+        let canvas = document.getElementById('canvas')
+        let context = canvas.getContext('2d')
+        let boundings = canvas.getBoundingClientRect();
+        console.log({boundings})
+
+        let isDrawing = false
+        let mouseX = 0
+        let mouseY = 0
+
+        document.querySelector('#colors').addEventListener('click',(event) => {
+            context.strokeStyle = event.target.value ?? "black"
+        })
+
+        document.querySelector("#pencil").addEventListener('change', () => {
+            context.lineWidth =  document.getElementById('#pencil')
+        })
+
+        canvas.addEventListener('mousedown',event => {
+            setMouseCoordinate(event)
+            isDrawing = true
+            context.beginPath()
+            context.moveTo(mouseX,mouseY)
+        })
+
+        canvas.addEventListener('mousemove',event => {
+            setMouseCoordinate(event)
+            if (isDrawing){
+                context.lineTo(mouseX,mouseY)
+                context.stroke()
+            }
+        })
+
+        canvas.addEventListener('mouseup',event => {
+            setMouseCoordinate(event)
+            isDrawing= false
+        })
+
+        let setMouseCoordinate = (event) => {
+            mouseX = event.clientX - boundings.left
+            mouseY = event.clientY - boundings.top
+        }
+
+        window.onload = () => {
+            document.querySelector('canvas').width = window.innerWidth
+            document.querySelector('canvas').height = window.innerHeight
+        }
+    </script>
+</body>
+</html>

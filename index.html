@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paint</title>
+    <style>
+        body{
+            box-sizing: border-box;
+            margin: 0;
+
+        }
+
+        #main-container{
+            display: flex;
+            flex-direction: column;
+        }
+
+        #toolbar{
+            flex: 20%;
+            background: antiquewhite;
+        }
+
+        #canvas-container{
+            flex: 80%;
+        }
+
+        #canvas{
+            width: 500px;
+            /*height: 100%;*/
+        }
+
+        .colors{
+            width: 20px;
+            height: 20px;
+            margin: 4px;
+        }
+
+        .text-center{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+<!--        <div id="toolbar">-->
+<!--            <div >-->
+<!--                <p class="text-center" >Colors</p>-->
+<!--                <div class="colors-container">-->
+<!--                    <div>-->
+<!--                        <button class="colors" value="#f0f" style="background: darkgreen">  </button>-->
+<!--                        <button class="colors" value="#f0f" style="background: darkgreen">  </button>-->
+<!--                        <button class="colors" value="#f0f" style="background: darkgreen">  </button>-->
+<!--                        <button class="colors" value="#f0f" style="background: darkgreen">  </button>-->
+<!--                        <button class="colors" value="#f0f" style="background: darkgreen">  </button>-->
+<!--                        <button class="colors" value="#f0f" style="background: darkgreen">  </button>-->
+<!--                        <button class="colors" value="#f0f" style="background: darkgreen">  </button>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        Custom Color <input type="color" value="#ff00ff">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <hr>-->
+<!--                <button>-->
+<!--                    CLear-->
+<!--                </button>-->
+
+<!--                <button>-->
+<!--                    Save-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div id="canvas-container">
+            <canvas id="canvas" style="border: 1px solid red">
+
+            </canvas>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
