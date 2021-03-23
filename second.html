@@ -16,26 +16,38 @@
         #canvas{
             border: 1px solid grey;
         }
+
+        .container{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
 
-    <div id="colors">
+<div class="container">
+
+    <p style="width: 100px; font-size: 20px; padding: 10px"> Paint Tool </p>
+
+    <div id="pencil_size" style="border: 1px solid grey">
+        <label for="pencil">Stroke Size</label>
+        <select name="pencil" id="pencil"></select>
+    </div>
+
+    <div id="colors" style="margin: 5px;border: 1px solid grey; padding: 5px">
+
         <button class="color" value="#ff00ff" style="background: #ff00ff"></button>
         <button class="color" value="#ff0000" style="background: #ff0000"></button>
         <button class="color" value="#00ff00" style="background: #00ff00"></button>
-    </div>
 
-    <div id="pencil_size">
-        <label for="pencil">Pencil Size</label>
-        <select name="pencil" id="pencil">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-        </select>
+        </div>
+
+        <div>
+            <button onclick="save()">Save</button>
+        </div>
+
+
     </div>
     <canvas id="canvas">
 
@@ -46,7 +58,6 @@
         let canvas = document.getElementById('canvas')
         let context = canvas.getContext('2d')
         let boundings = canvas.getBoundingClientRect();
-        console.log({boundings})
 
         let isDrawing = false
         let mouseX = 0
@@ -57,7 +68,8 @@
         })
 
         document.querySelector("#pencil").addEventListener('change', () => {
-            context.lineWidth =  document.getElementById('#pencil')
+            context.lineWidth =  document.getElementById('pencil').value
+            console.log({size : document.getElementById('pencil').value})
         })
 
         canvas.addEventListener('mousedown',event => {
@@ -88,6 +100,27 @@
         window.onload = () => {
             document.querySelector('canvas').width = window.innerWidth
             document.querySelector('canvas').height = window.innerHeight
+
+            setPencilWidth()
+        }
+
+        function save(){
+            let link = document.createElement('a')
+            link.setAttribute('download', 'Image.png');
+            link.setAttribute('href',  document.querySelector('#canvas').toDataURL("image/png").replace("image/png", "image/octet-stream"));
+            link.click();
+
+        }
+
+        function setPencilWidth(){
+            let pencils = document.querySelector('#pencil');
+            for (let i = 0; i<40; i++){
+
+                    // pencils.append("dadasda")
+                let el = document.createElement("option");
+                el.appendChild(document.createTextNode(i+1))
+                pencils.append(el);
+            }
         }
     </script>
 </body>
